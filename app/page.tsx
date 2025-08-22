@@ -14,7 +14,11 @@ const HomePage = () => {
       <HomeHeader />
 
       {/* Loading State */}
-      {isLoading && <ResturantCardListingSkeleton />}
+      {isLoading &&
+        <div className="custom-container">
+          <ResturantCardListingSkeleton />
+        </div>
+      }
 
       {/* Data State */}
       {!isLoading && Number(resturantList?.data?.length) > 0 && (

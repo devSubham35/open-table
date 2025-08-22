@@ -3,6 +3,9 @@ import Image from "next/image"
 import { redirect } from "next/navigation"
 import { PAGE_PATHS } from "@/lib/pagePath"
 import { MapPin, Tag, Globe, CookingPot } from "lucide-react"
+import { FaStar } from "react-icons/fa"
+import { Review } from "@/api/hook/dashboard/resturant/schema"
+import { calculateAverageRating } from "@/lib/functions/_helper.lib"
 
 interface RestaurantCardProps {
   item: {
@@ -14,17 +17,20 @@ interface RestaurantCardProps {
     main_image?: string
     region?: { name: string }
     location?: { name: string }
+    reviews?: Review[]
   }
 }
 
 const RestaurantCard = ({ item }: RestaurantCardProps) => {
+
+  const averageRating = calculateAverageRating(item?.reviews as Review[])
 
   return (
     <div
       key={item?.id}
       className="group flex flex-col w-full rounded-2xl border bg-card shadow-sm 
       hover:shadow-md transition-all duration-200 overflow-hidden cursor-pointer"
-      onClick={()=> redirect(`${PAGE_PATHS.resturant}/${item?.slug}`)}
+      onClick={() => redirect(`${PAGE_PATHS.resturant}/${item?.slug}`)}
     >
       {/* Image */}
       <div className="w-full h-[140px] bg-muted rounded-t-2xl overflow-hidden">
@@ -56,10 +62,18 @@ const RestaurantCard = ({ item }: RestaurantCardProps) => {
             </span>
           </div>
 
-          <div className="flex items-center text-sm font-medium">
-            <Tag size={16} className="mr-2 text-muted-foreground" />
-            {item?.price}
+          <div className="flex items-center justify-between">
+            <div className="flex items-center text-sm font-medium">
+              <Tag size={16} className="mr-2 text-muted-foreground" />
+              {item?.price}
+            </div>
+
+            {averageRating > 0 &&  <h1 className="flex items-center gap-1">
+              {averageRating} <FaStar className="text-yellow-500 " />
+            </h1>
+            }
           </div>
+
         </div>
       </div>
     </div>

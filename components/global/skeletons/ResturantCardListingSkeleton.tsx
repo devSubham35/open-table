@@ -1,6 +1,6 @@
 const ResturantCardListingSkeleton = () => {
   return (
-    <div className="custom-container grid grid-cols-2 md:grid-cols-4 gap-5 py-6">
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-5 py-6">
       {Array.from({ length: 5 }).map((_, i) => (
         <div
           key={i}

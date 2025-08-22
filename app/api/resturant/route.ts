@@ -60,6 +60,7 @@ export const GET = asyncHandler(async (req: Request) => {
     include: {
       region: true,
       location: true,
+      reviews: true,
     },
   });
 

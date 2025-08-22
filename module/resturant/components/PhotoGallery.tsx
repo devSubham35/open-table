@@ -52,7 +52,7 @@ const PhotoGallery = ({
 
             {/* Thumbnail Grid */}
             <div className="grid grid-cols-5 gap-2">
-                {images.slice(0, 5).map((src, i) => (
+                {images.slice(0, 10).map((src, i) => (
                     <button
                         key={i}
                         onClick={handleOpenGallery}
@@ -64,9 +64,9 @@ const PhotoGallery = ({
                             fill
                             className="object-cover hover:scale-105 transition-transform"
                         />
-                        {i === 4 && images.length > 5 && (
+                        {i === 9 && images.length > 5 && (
                             <div className="absolute inset-0 flex items-center justify-center bg-black/50 text-white font-medium text-lg">
-                                +{images.length - 4} More
+                                +{images.length - 9} More
                             </div>
                         )}
                     </button>
@@ -105,7 +105,7 @@ const PhotoGallery = ({
             {/* Big Viewer Modal */}
             <Dialog open={viewerOpen} onOpenChange={setViewerOpen}>
 
-                <DialogContent className="w-[70vw] max-w-[70vw] lg:max-w-[800px] 
+                <DialogContent className="w-[70vw] max-w-[80vw] lg:max-w-[1000px] 
                 h-[80vh] p-0 flex items-center justify-center bg-white overflow-hidden">
                     {activeIndex !== null && (
                         <div className="relative w-full h-full flex items-center justify-center">

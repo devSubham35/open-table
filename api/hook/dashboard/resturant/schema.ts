@@ -10,6 +10,7 @@ export interface RestaurantData {
   slug: string
   main_image: string
   description: string
+  overview_description: string
   price: string
   open_time: string
   close_time: string
@@ -19,6 +20,7 @@ export interface RestaurantData {
   updated_at: string | Date
   region: Region
   location: Location
+  reviews: Review[]
 }
 
 export interface Region {
@@ -31,6 +33,17 @@ export interface Region {
 export interface Location {
   id: string
   name: string
+  created_at: string | Date
+  updated_at: string | Date
+}
+
+export interface Review {
+  id: string
+  full_name: string
+  description: string
+  rating: number
+  user_id: string
+  restaurant_id: string
   created_at: string | Date
   updated_at: string | Date
 }

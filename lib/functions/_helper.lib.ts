@@ -2,6 +2,7 @@ import CustomAlert from "./CustomAlert";
 import { AxiosError, AxiosResponse } from "axios";
 import { BaseApiResponse } from "@/typescript/interface/common.types";
 import { destroyCookie } from "nookies";
+import { Review } from "@/api/hook/dashboard/resturant/schema";
 
 
 export const globalCatchSucess = (response: AxiosResponse<BaseApiResponse>) => {
@@ -35,3 +36,9 @@ export const clearCookie = (name: string, ctx?: unknown) => {
   destroyCookie(ctx || null, name, { path: '/' });
 };
 
+export const calculateAverageRating = (reviews: Review[])=>{
+   return reviews.length > 0
+      ? reviews.reduce((sum, review) => sum + review.rating, 0) /
+      reviews.length
+      : 0
+}
