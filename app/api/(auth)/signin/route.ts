@@ -12,22 +12,22 @@ export const POST = asyncHandler(async (req: Request) => {
     throw new ApiError(400, "All fields are required");
   }
 
-  // const existedUser = await prisma.user.findUnique({ where: { email } });
+  const existedUser = await prisma.user.findUnique({ where: { email } });
 
-  // if (!existedUser) {
-  //   throw new ApiError(400, "User not exist");
-  // }
+  if (!existedUser) {
+    throw new ApiError(400, "User not exist");
+  }
 
-  // const isValidPassword = await bcrypt.compare(password, existedUser?.password);
+  const isValidPassword = await bcrypt.compare(password, existedUser?.password);
 
-  // if (!isValidPassword) {
-  //   throw new ApiError(400, "Invalid credentials");
-  // }
+  if (!isValidPassword) {
+    throw new ApiError(400, "Invalid credentials");
+  }
 
   return successResponse(201, "Sign in successfully", 
-    // { 
-    //   id: existedUser?.id, 
-    //   full_name: existedUser?.full_name 
-    // }
+    { 
+      id: existedUser?.id, 
+      full_name: existedUser?.name 
+    }
   );
 });

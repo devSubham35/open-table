@@ -2,7 +2,7 @@ import { z } from "zod";
 
 export const SignUpValidationSchema = z.object({
   email: z.string().email(),
-  full_name: z.string(),
+  name: z.string(),
   password: z.string().min(8, "Password must be at least 8 characters long"),
 });
 

@@ -8,12 +8,9 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// model User {
-//   id            String @id @default(cuid())
-//   full_name     String
-//   email         String @unique
-//   password      String
-// }
+
+//////////////////////////////////////////
+//////////////////////////////////////////
 
 enum PRICE {
   CHEAP
@@ -22,9 +19,9 @@ enum PRICE {
 }
 
 model Restaurant {
-  id          String   @id @default(cuid())
+  id          String     @id @default(cuid())
   name        String
-  slug        String   @unique
+  slug        String     @unique
   main_image  String
   description String
   price       PRICE
@@ -32,11 +29,12 @@ model Restaurant {
   close_time  String
   items       MenuItem[]
   location_id String
-  location    Location @relation(fields: [location_id], references: [id])
+  location    Location   @relation(fields: [location_id], references: [id])
   region_id   String
-  region      Region   @relation(fields: [region_id], references: [id])
-  created_at  DateTime @default(now())
-  updated_at  DateTime @updatedAt
+  region      Region     @relation(fields: [region_id], references: [id])
+  reviews     Review[]
+  created_at  DateTime   @default(now())
+  updated_at  DateTime   @updatedAt
 }
 
 model MenuItem {
@@ -64,4 +62,28 @@ model Region {
   restaurants Restaurant[]
   created_at  DateTime     @default(now())
   updated_at  DateTime     @updatedAt
+}
+
+model Review {
+  id            String     @id @default(cuid())
+  full_name     String
+  description   String
+  rating        Float
+  user_id       String
+  User          User       @relation(fields: [user_id], references: [id])
+  restaurant_id String
+  Restaurant    Restaurant @relation(fields: [restaurant_id], references: [id])
+  created_at    DateTime   @default(now())
+  updated_at    DateTime   @updatedAt
+}
+
+model User {
+  id         String   @id @default(cuid())
+  name       String
+  city       String
+  password   String
+  email      String   @unique
+  reviews    Review[]
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 }

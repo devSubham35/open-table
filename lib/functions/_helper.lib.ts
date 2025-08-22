@@ -34,3 +34,4 @@ export const globalCatchError = (error: AxiosError<BaseApiResponse>) => {
 export const clearCookie = (name: string, ctx?: unknown) => {
   destroyCookie(ctx || null, name, { path: '/' });
 };
+

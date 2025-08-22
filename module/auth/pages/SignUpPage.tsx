@@ -22,7 +22,7 @@ const SignUpPage = () => {
     defaultValues: {
       email: "",
       password: "",
-      full_name: "",
+      name: "",
     },
     resolver: zodResolver(SignUpValidationSchema),
   });
@@ -55,15 +55,15 @@ const SignUpPage = () => {
           <div>
             <label className="block text-sm font-medium">Full Name</label>
             <Controller
-              name="full_name"
+              name="name"
               control={control}
               render={({ field }) => (
                 <Input type="text" placeholder="Full name" {...field} />
               )}
             />
-            {errors.full_name && (
+            {errors.name && (
               <p className="text-sm text-red-500 mt-1">
-                {errors.full_name.message}
+                {errors.name.message}
               </p>
             )}
           </div>
