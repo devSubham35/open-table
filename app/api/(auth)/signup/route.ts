@@ -23,9 +23,14 @@ export const POST = asyncHandler(async (req: Request) => {
   const hashedPassword = await bcrypt.hash(password, 10);
 
   const newUser = await prisma.user.create({
-    data: { name, email, password: hashedPassword },
+    data: {
+      name,
+      email,
+      password: hashedPassword
+    },
     select: { id: true, name: true, email: true },
   });
+
 
   const jwt_token = jwt.sign(
     { id: newUser?.id },

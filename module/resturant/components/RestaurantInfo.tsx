@@ -27,6 +27,7 @@ interface RestaurantInforProps {
 const RestaurantInfo = ({ data }: RestaurantInforProps) => {
   const [activeSection, setActiveSection] = useState("overview");
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const sectionRefs: Record<string, React.RefObject<HTMLDivElement | null>> = {
     overview: useRef(null),
     photos: useRef(null),
